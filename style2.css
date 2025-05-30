@@ -1,0 +1,85 @@
+/* --- Estilos para o Cabeçalho da Página Interna (contato.html) --- */
+.header-internal {
+    background-color: var(--secondary-color); /* Fundo escuro */
+    padding: 20px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.container-header-internal {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.header-internal .logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8em;
+    font-weight: 700;
+    color: var(--primary-color); /* Amarelo dourado */
+    text-decoration: none;
+}
+
+.menu-internal ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 30px;
+}
+
+.menu-internal ul li a {
+    color: var(--white);
+    font-size: 1.1em;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 5px 0;
+    transition: color 0.3s ease;
+}
+
+.menu-internal ul li a:hover {
+    color: var(--primary-color);
+}
+
+/* Estilos para o Mapa (opcional) */
+.map-container {
+    margin-top: 60px;
+    padding: 20px;
+    background-color: var(--light-grey);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.07);
+}
+
+.map-title {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--dark-grey);
+    margin-bottom: 20px;
+    font-size: 2em;
+    text-align: center;
+}
+
+.map-container iframe {
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Responsividade para o cabeçalho interno */
+@media (max-width: 768px) {
+    .header-internal .container-header-internal {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .menu-internal ul {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    .menu-internal ul li a {
+        font-size: 1em;
+    }
+    .map-title {
+        font-size: 1.8em;
+    }
+}

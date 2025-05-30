@@ -1,0 +1,919 @@
+/* Importações de Fontes - Já no HTML, mas reconfirmo aqui para clareza */
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap'); */
+
+:root {
+    /* Cores personalizadas para fácil ajuste */
+    --primary-color: #FFD700; /* Amarelo dourado, inspirado no branding */
+    --secondary-color: #333; /* Cinza escuro para textos e fundos */
+    --accent-color: #007bff; /* Azul vibrante para CTAs e destaques */
+    --light-grey: #f4f4f4;
+    --dark-grey: #2c3e50;
+    --text-color: #444;
+    --white: #ffffff;
+    --card-bg: #fdfdfd;
+    --whatsapp-green: #25D366; /* Cor oficial do WhatsApp */
+}
+
+/* Estilos Gerais */
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--light-grey);
+    color: var(--text-color);
+    line-height: 1.6;
+    scroll-behavior: smooth;
+}
+
+a {
+    text-decoration: none;
+    color: var(--accent-color);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--primary-color);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+section {
+    padding: 80px 0;
+    overflow: hidden; /* Garante que elementos com animação não causem overflow */
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--dark-grey);
+    font-weight: 700;
+}
+
+h1 {
+    font-size: 3.8em;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: 2.8em;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+h3 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+}
+
+p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+.btn-cta {
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-size: 1.1em;
+    font-weight: 600;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-cta.primary {
+    background-color: var(--primary-color);
+    color: var(--dark-grey);
+}
+
+.btn-cta.primary:hover {
+    background-color: #e0b800; /* Um tom ligeiramente mais escuro do amarelo */
+    transform: translateY(-3px);
+}
+
+.btn-small {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--accent-color);
+    color: var(--white);
+    border-radius: 5px;
+    font-size: 0.9em;
+    font-weight: 600;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-small:hover {
+    background-color: #0056b3; /* Um tom mais escuro do azul */
+    transform: translateY(-2px);
+}
+
+.btn-whatsapp {
+    background-color: var(--whatsapp-green);
+    color: var(--white);
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-whatsapp:hover {
+    background-color: #1DA851; /* Um tom mais escuro do verde WhatsApp */
+    transform: translateY(-2px);
+}
+
+/* --- Cabeçalho Principal (index.html) --- */
+.header {
+    background-color: var(--dark-grey);
+    color: var(--white);
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header .logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2em;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 30px;
+}
+
+.menu ul li a {
+    color: var(--white);
+    font-size: 1.1em;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 5px 0;
+    transition: color 0.3s ease;
+}
+
+.menu ul li a:hover {
+    color: var(--primary-color);
+}
+
+/* Oculta o menu-toggle por padrão no desktop */
+.menu-toggle {
+    display: none;
+    font-size: 1.8em;
+    cursor: pointer;
+    color: var(--primary-color);
+}
+
+/* Estilos para o menu mobile (oculto por padrão) */
+.menu-mobile {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    transform: translateX(100%); /* Começa fora da tela */
+    transition: transform 0.3s ease-in-out;
+}
+
+.menu-mobile.ativo {
+    transform: translateX(0); /* Desliza para dentro */
+}
+
+.menu-mobile ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+.menu-mobile ul li {
+    margin-bottom: 25px;
+}
+
+.menu-mobile ul li a {
+    color: var(--white);
+    font-size: 1.8em;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.menu-mobile ul li a:hover {
+    color: var(--primary-color);
+}
+
+.menu-mobile .btn-whatsapp-mobile {
+    margin-top: 30px;
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: var(--whatsapp-green);
+    color: var(--white);
+    border-radius: 5px;
+    font-size: 1.2em;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.menu-mobile .btn-whatsapp-mobile:hover {
+    background-color: #1DA851;
+}
+
+/* --- Hero Section (index.html) --- */
+.hero-section {
+    /* IMAGEM DE FUNDO ATUALIZADA AQUI */
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('foto/logoIMS.png') no-repeat center center/cover;
+
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--white);
+    padding: 0 20px;
+    box-sizing: border-box; /* Garante que o padding não aumente a altura total */
+}
+
+.hero-section h1 {
+    color: var(--white);
+    font-size: 4.5em;
+    margin-bottom: 25px;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    margin: auto;
+}
+
+.hero-section p {
+    font-size: 1.4em;
+    margin-bottom: 40px;
+    max-width: 800px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    margin: auto;
+
+}
+
+/* --- Seção de Serviços (index.html) --- */
+.services-section {
+    background-color: var(--white);
+    padding: 80px 0;
+}
+
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.service-card {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+}
+
+.service-card i {
+    font-size: 3.5em;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.service-card h3 {
+    margin-bottom: 15px;
+    color: var(--dark-grey);
+}
+
+.service-card p {
+    font-size: 1em;
+    color: var(--text-color);
+    margin-bottom: 25px;
+}
+
+/* --- Seção Sobre Nós (index.html) --- */
+.about-section {
+    background-color: var(--light-grey);
+    padding: 80px 0;
+}
+
+.about-content {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    flex-wrap: wrap; /* Permite que os elementos quebrem a linha em telas menores */
+    justify-content: center; /* Centraliza no wrap */
+}
+
+.about-image {
+    flex: 1;
+    min-width: 300px; /* Garante que a imagem não fique muito pequena */
+    max-width: 500px; /* Limita o tamanho máximo da imagem */
+    text-align: center;
+}
+
+.about-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.about-text {
+    flex: 2;
+    min-width: 300px; /* Garante que o texto não fique muito pequeno */
+    max-width: 700px;
+}
+
+.about-text h2 {
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+/* --- Seção de Testemunhos (index.html) --- */
+.testimonials-section {
+    background-color: var(--white);
+    padding: 80px 0;
+    text-align: center;
+}
+
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.testimonial-card {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    text-align: center;
+    font-style: italic;
+    position: relative;
+    padding-top: 40px; /* Espaço para aspas */
+}
+
+.testimonial-card::before {
+    content: "\201C"; /* Aspas de abertura */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 4em;
+    color: var(--primary-color);
+    position: absolute;
+    top: 5px;
+    left: 20px;
+    opacity: 0.6;
+}
+
+.testimonial-card p {
+    font-size: 1.05em;
+    color: var(--text-color);
+    margin-bottom: 15px;
+}
+
+.testimonial-card h4 {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--dark-grey);
+    margin-bottom: 5px;
+}
+
+.testimonial-card span {
+    font-size: 0.9em;
+    color: #777;
+    display: block;
+}
+
+/* --- Seção CTA (index.html) --- */
+.cta-section {
+    background-color: var(--accent-color);
+    color: var(--white);
+    padding: 80px 0;
+    text-align: center;
+}
+
+.cta-section h2 {
+    color: var(--white);
+    margin-bottom: 20px;
+}
+
+.cta-section p {
+    color: var(--white);
+    font-size: 1.2em;
+    margin-bottom: 40px;
+}
+
+.cta-actions {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+}
+
+.cta-card {
+    background-color: var(--white);
+    color: var(--text-color);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    flex: 1;
+    min-width: 320px;
+    max-width: 450px;
+    text-align: left;
+}
+
+.cta-card h3 {
+    color: var(--dark-grey);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.cta-card p {
+    font-size: 1em;
+    color: var(--text-color);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.cta-card ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.cta-card ul li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-color);
+    font-size: 1.1em;
+}
+
+.cta-card ul li i {
+    color: var(--primary-color);
+    font-size: 1.2em;
+}
+
+.cta-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.cta-form input,
+.cta-form select {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.cta-form button {
+    width: 100%;
+}
+
+.chamada-contato-final {
+    background-color: var(--primary-color);
+    color: var(--dark-grey);
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 60px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.chamada-contato-final p {
+    font-size: 1.5em;
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: var(--dark-grey);
+}
+
+
+/* --- Rodapé --- */
+footer {
+    background-color: var(--dark-grey);
+    color: var(--white);
+    padding: 40px 0;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.footer-content p {
+    margin: 0;
+    font-size: 1em;
+}
+
+.social-links {
+    display: flex;
+    gap: 20px;
+}
+
+.social-links a {
+    color: var(--white);
+    font-size: 1.8em;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--primary-color);
+}
+
+/* --- Animação de Scroll Reveal --- */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Estilos para o Cabeçalho da Página Interna (contato.html) --- */
+.header-internal {
+    background-color: var(--secondary-color); /* Fundo escuro */
+    padding: 20px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: fixed; /* Fixar no topo */
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.container-header-internal {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.header-internal .logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8em;
+    font-weight: 700;
+    color: var(--primary-color); /* Amarelo dourado */
+    text-decoration: none;
+}
+
+.menu-internal ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 30px;
+}
+
+.menu-internal ul li a {
+    color: var(--white);
+    font-size: 1.1em;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 5px 0;
+    transition: color 0.3s ease;
+}
+
+.menu-internal ul li a:hover {
+    color: var(--primary-color);
+}
+
+/* Estilos para o Mapa */
+.map-container {
+    margin-top: 60px;
+    padding: 20px;
+    background-color: var(--light-grey);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.07);
+}
+
+.map-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.2em;
+    color: var(--dark-grey);
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.map-container iframe {
+    border-radius: 8px;
+}
+
+/* --- Estilos da Página de Contato (contato.html) --- */
+.contact-hero {
+    background-color: var(--dark-grey);
+    color: var(--white);
+    text-align: center;
+    padding: 120px 20px 60px; /* Padding extra para o header fixo */
+    margin-top: -80px; /* Para 'puxar' a seção para cima, sob o header */
+}
+
+/* Estilo para a logo adicionada no contact-hero */
+.contact-page-logo {
+    max-width: 200px; /* Ajuste o tamanho conforme necessário */
+    height: auto;
+    margin-bottom: 20px; /* Espaçamento entre a logo e o H1 */
+    filter: brightness(1.2); /* Opcional: para destacar a logo em fundo escuro */
+}
+
+
+.contact-hero h1 {
+    color: var(--white);
+    font-size: 3.5em;
+    margin-bottom: 15px;
+}
+
+.contact-hero p {
+    font-size: 1.2em;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.contact-content {
+    padding: 80px 0;
+    background-color: var(--white);
+}
+
+.contact-content .container {
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap; /* Permite quebra de linha em telas menores */
+    justify-content: center;
+}
+
+.contact-info,
+.contact-form-container {
+    flex: 1;
+    min-width: 300px;
+    max-width: 550px;
+    background-color: var(--card-bg);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.contact-info h2,
+.contact-form-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--dark-grey);
+}
+
+.contact-info p {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    color: var(--text-color);
+}
+
+.contact-info p i {
+    color: var(--primary-color);
+    font-size: 1.3em;
+}
+
+.contact-info p a {
+    color: var(--text-color);
+}
+
+.contact-info p a:hover {
+    color: var(--primary-color);
+}
+
+.contact-form .form-group {
+    margin-bottom: 20px;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--dark-grey);
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box; /* Garante que padding não aumente a largura */
+}
+
+.contact-form textarea {
+    resize: vertical; /* Permite redimensionar verticalmente */
+}
+
+.contact-form button {
+    width: auto; /* Botão não ocupa a largura total */
+    display: block; /* Para poder centralizar com margin: auto */
+    margin: 30px auto 0 auto; /* Centraliza e adiciona margem superior */
+}
+
+/* --- Responsividade --- */
+
+@media (max-width: 992px) {
+    .hero-section h1 {
+        font-size: 3.5em;
+    }
+    .hero-section p {
+        font-size: 1.2em;
+    }
+    .service-grid,
+    .testimonial-grid,
+    .cta-actions,
+    .about-content,
+    .contact-content .container {
+        grid-template-columns: 1fr; /* Coluna única para layouts de grid */
+        flex-direction: column; /* Empilha elementos flexíveis */
+    }
+
+    .about-text h2 {
+        text-align: center;
+    }
+
+    .cta-card {
+        max-width: 100%; /* Ocupa a largura total disponível */
+    }
+
+    .menu {
+        display: none; /* Oculta o menu de desktop */
+    }
+
+    .menu-toggle {
+        display: block; /* Mostra o ícone do menu-toggle */
+    }
+
+    /* Ajustes para o cabeçalho interno em telas menores */
+    .header-internal .container-header-internal {
+        flex-direction: row; /* Mantém logo e toggle lado a lado */
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 768px) {
+    section {
+        padding: 50px 0;
+    }
+    h1 {
+        font-size: 3em;
+    }
+    h2 {
+        font-size: 2.2em;
+        margin-bottom: 30px;
+    }
+    .btn-cta {
+        padding: 12px 25px;
+        font-size: 1em;
+    }
+    .hero-section {
+        height: 80vh; /* Ajuste a altura para telas menores */
+        padding-top: 80px;
+    }
+    .hero-section h1 {
+        font-size: 3em;
+    }
+    .hero-section p {
+        font-size: 1.1em;
+    }
+    /* Responsividade para a seção "Sobre Nós" */
+    .about-section {
+        padding: 60px 15px;
+    }
+    .about-text p {
+        font-size: 1em;
+    }
+
+    /* Responsividade do Formulário de Contato */
+    .contact-form {
+        padding: 0 10px; /* Adiciona um pequeno padding nas laterais */
+    }
+    .contact-info p {
+        flex-direction: column; /* Empilha ícone e texto em telas menores */
+        text-align: center;
+    }
+
+    /* Responsividade para o cabeçalho interno */
+    .header-internal .container-header-internal {
+        flex-direction: row; /* Mantém logo e toggle lado a lado */
+        justify-content: space-between;
+    }
+    /* Certifique-se que o .menu-toggle exista no HTML da página de contato */
+    .map-title {
+        font-size: 1.8em;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-section {
+        height: 60vh; /* Altura ainda menor */
+        padding-top: 80px; /* Ajuste para o header fixo */
+    }
+    .hero-section h1 {
+        font-size: 2.5em;
+    }
+    .hero-section p {
+        font-size: 1em;
+    }
+    .header .logo {
+        font-size: 1.5em;
+    }
+    .header-internal .logo {
+        font-size: 1.5em;
+    }
+    .menu-mobile ul li a {
+        font-size: 1.5em;
+    }
+    .menu-mobile .btn-whatsapp-mobile {
+        font-size: 1em;
+    }
+    .contact-hero h1 {
+        font-size: 2.5em;
+    }
+    .contact-hero p {
+        font-size: 1em;
+    }
+    .contact-info,
+    .contact-form-container {
+        padding: 25px;
+    }
+    .contact-info h2,
+    .contact-form-container h2 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+    .contact-info p {
+        font-size: 0.9em;
+        gap: 10px;
+    }
+    .contact-info p i {
+        font-size: 1.1em;
+    }
+    .cta-card {
+        padding: 25px;
+    }
+    .chamada-contato-final p {
+        font-size: 1.2em;
+    }
+    .footer-content {
+        gap: 10px;
+    }
+    .social-links {
+        gap: 15px;
+    }
+    .social-links a {
+        font-size: 1.5em;
+    }
+}
